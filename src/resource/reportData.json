@@ -1,0 +1,59 @@
+[
+  {
+    "filePath": "convert-lab/miniprogram/utils/util.js",
+    "message": "formatJson好像是在对Json数据进行格式化，但是这个函数是对Json数据进行清理",
+    "title": "函数名字不好听formatJson",
+    "location": {
+      "loc": 22,
+      "row": {
+        "start": 17,
+        "end": 27
+      }
+    },
+    "type": "major",
+    "childReportMsg": []
+  },
+  {
+    "filePath": "convert-lab/miniprogram/packagesAPI/pages/basics/basics/index.js",
+    "message": "就是看不懂你这个啥意思CxYh",
+    "title": "看不懂你这个啥意思",
+    "location": {
+      "loc": 40,
+      "row": {
+        "start": 24,
+        "end": 28
+      }
+    },
+    "type": "needCheck",
+    "childReportMsg": []
+  },
+  {
+    "filePath": "convert-lab/miniprogram/canvas/index.wxml",
+    "message": "这个是一个变量，转换时无法分辨数据类型，请注意",
+    "title": "这是一个变量",
+    "location": {
+      "loc": 5,
+      "row": {
+        "start": 28,
+        "end": 36
+      }
+    },
+    "type": "notFound",
+    "childReportMsg": []
+  },
+  {
+    "filePath": "convert-lab/miniprogram/canvas/index.js",
+    "message": "这个变量的长度太长太长太长太长太长太长太长太长太长太长太长太长了",
+    "title": "名字太长了",
+    "location": {
+      "loc": 553,
+      "row": {
+        "start": 38,
+        "end": 71
+      }
+    },
+    "type": "major",
+    "childReportMsg": []
+  }
+]
+
