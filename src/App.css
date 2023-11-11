@@ -1,5 +1,38 @@
-.project-detail-content {
-  flex: none;
-  margin: 24px;
+.report-wrapper {
+  background: #f6f6f8;
+  min-height: 100%;
+}
+
+.menu-wrapper {
+  padding: 16px 29px 0 27px;
+}
+
+.convertor-report-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.convertor-report-icon {
+  height: 48px;
+  width: 48px;
+  border-radius: 8px;
+  background-image: linear-gradient(134deg, #4ac7e0 0%, #3c5cca 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.convertor-report-name {
+  margin: 9px 12px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #252b3a;
+}
+
+.breadcrumb-wrapper {
+  margin: 26px 0 16px 26px;
+  font-family: 'HarmonyOS_Sans_SC';
+  font-size: 18px;
 }
 

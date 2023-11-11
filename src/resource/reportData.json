@@ -1,59 +1,242 @@
-[
-  {
-    "filePath": "convert-lab/miniprogram/utils/util.js",
-    "message": "formatJson好像是在对Json数据进行格式化，但是这个函数是对Json数据进行清理",
-    "title": "函数名字不好听formatJson",
-    "location": {
-      "loc": 22,
-      "row": {
-        "start": 17,
-        "end": 27
-      }
+{
+  "projectName": "convert-lab",
+  "projectPath": "D:/project/weapp/convert-lab",
+  "pageNums": 33,
+  "fileNums": 121,
+  "errMsgList": [
+    {
+      "title": "自定义数据data-*不支持引用数据类型",
+      "filePath": "convert-lab/miniprogram/utils/util.js",
+      "errCodeList": [
+        {
+          "codeBeforeConvert": {
+            "filePath": "convert-lab/miniprogram/utils/util.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          },
+          "codeAfterConvert": {
+            "filePath": "convert-lab/miniprogram/utils/util.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          }
+        }
+      ]
     },
-    "type": "major",
-    "childReportMsg": []
-  },
-  {
-    "filePath": "convert-lab/miniprogram/packagesAPI/pages/basics/basics/index.js",
-    "message": "就是看不懂你这个啥意思CxYh",
-    "title": "看不懂你这个啥意思",
-    "location": {
-      "loc": 40,
-      "row": {
-        "start": 24,
-        "end": 28
-      }
+    {
+      "title": "不支持wx:scope-data属性",
+      "filePath": "convert-lab/miniprogram/pages/index/index.js",
+      "errCodeList": [
+        {
+          "codeBeforeConvert": {
+            "filePath": "convert-lab/miniprogram/pages/index/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          },
+          "codeAfterConvert": {
+            "filePath": "convert-lab/miniprogram/pages/index/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          }
+        }
+      ]
     },
-    "type": "needCheck",
-    "childReportMsg": []
-  },
-  {
-    "filePath": "convert-lab/miniprogram/canvas/index.wxml",
-    "message": "这个是一个变量，转换时无法分辨数据类型，请注意",
-    "title": "这是一个变量",
-    "location": {
-      "loc": 5,
-      "row": {
-        "start": 28,
-        "end": 36
-      }
+    {
+      "title": "commonjs与es6语法混用",
+      "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
+      "errCodeList": [
+        {
+          "codeBeforeConvert": {
+            "filePath": "convert-lab/miniprogram/utils/util.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          },
+          "codeAfterConvert": {
+            "filePath": "convert-lab/miniprogram/utils/util.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          }
+        },
+        {
+          "codeBeforeConvert": {
+            "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          },
+          "codeAfterConvert": {
+            "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          }
+        }
+      ]
     },
-    "type": "notFound",
-    "childReportMsg": []
-  },
-  {
-    "filePath": "convert-lab/miniprogram/canvas/index.js",
-    "message": "这个变量的长度太长太长太长太长太长太长太长太长太长太长太长太长了",
-    "title": "名字太长了",
-    "location": {
-      "loc": 553,
-      "row": {
-        "start": 38,
-        "end": 71
-      }
-    },
-    "type": "major",
-    "childReportMsg": []
-  }
-]
-
+    {
+      "title": "data直接赋值不生效，请使用setData进行赋值",
+      "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
+      "errCodeList": [
+        {
+          "codeBeforeConvert": {
+            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          },
+          "codeAfterConvert": {
+            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          }
+        },
+        {
+          "codeBeforeConvert": {
+            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          },
+          "codeAfterConvert": {
+            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          }
+        },
+        {
+          "codeBeforeConvert": {
+            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          },
+          "codeAfterConvert": {
+            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
+            "code": "",
+            "location": {
+              "loc": {
+                "start": 17,
+                "end": 27
+              },
+              "row": {
+                "start": 17,
+                "end": 27
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,42 +1,33 @@
-import { Layout, Card } from 'antd';
+import { Layout } from 'antd';
 import './ProjectDetail.css';
 const { Content } = Layout;
 
 function ProjectDetail({projectDetail}) {
-  const details = projectDetail || [
-    {
-      name: 'projectName',
-      label: '项目名称',
-      detail: 'convewrt-lab',
-    },
-    {
-      name: 'projectPath',
-      label: '项目路径',
-      detail: 'D:\\projects\\weapp\\convert-lab',
-    },
-    {
-      name: 'pageNumber',
-      label: '页面数',
-      detail: 134,
-    },
-    {
-      name: 'fileNumber',
-      label: '文件数',
-      detail: '536',
-    }
-  ];
-
   return (
     <Content className='project-detail-content'>
-      <Card title="项目基本信息" bordered={false} className='project-detail-card'>
-        {
-          details.map((detail, index) => {
-            return (
-              <p key={detail.name}>{detail.label}: {detail.detail}</p>
-            )
-          })
-        }
-      </Card>
+      <div className='project-detail-card'>
+        <div className='project-detail-title'>项目基本信息</div>
+        <div className='project-detail-wrapper'>
+          <div className='project-detail'>
+            <div className='project-detail-basic'>
+              <div className='project-detail-label'>项目名称</div>
+              <div>{projectDetail.projectName}</div>
+            </div>
+            <div className='project-detail-basic'>
+              <div className='project-detail-label'>项目路径</div>
+              <div>{projectDetail.projectPath}</div>
+            </div>
+          </div>
+          <div className='project-detail'>
+            <div className='project-detail-label'>页面数</div>
+            <div className='project-detail-data'>{projectDetail.pageNums}</div>
+          </div>
+          <div className='project-detail'>
+            <div className='project-detail-label'>文件数</div>
+            <div className='project-detail-data'>{projectDetail.fileNums}</div>
+          </div>
+        </div>
+      </div>
     </Content>
   );
 }

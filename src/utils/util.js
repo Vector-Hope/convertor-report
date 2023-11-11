@@ -1,26 +1,28 @@
 import data from '../resource/reportData.json';
 
-// function fileNode(name) {
-// 	this.name = name;
-// 	this.filesList = [];
-// }
+const msgData =  data.errMsgList;
 
+// 定义重置报告数据结构
 const reportData = {
-	errMessageNum: data.length,
-	errTypeCount: {},
+	projectDetail: {
+		projectName: data.projectName,
+		projectPath: data.projectPath,
+		pageNums: data.pageNums,
+		fileNums: data.fileNums,
+	},
 	filesTree: {},
 	errMessage: [],
 };
 
 let filesTree = {};
-let menuKeyIndex = 0;
 
 /**
- * 
- * @param {Object} tree 
- * @returns {Object}
+ * @description: 获得工程文件目录信息
+ * @param {Object} tree
+ * @param {string} pathKey
+ * @return {Object}
  */
-function getFilesMenu (tree) {
+function getFilesMenu (tree, pathKey = '') {
 	let pathTree = tree;
 	let pathNames = Object.keys(pathTree);
 	let label = pathNames[0];
@@ -29,7 +31,7 @@ function getFilesMenu (tree) {
 
 	if (pathNames.length === 0) {
 		return {
-			key: menuKeyIndex ++,
+			key: pathKey ? `${pathKey}/${label}` : label,
 			label: label
 		}
 	}
@@ -39,17 +41,18 @@ function getFilesMenu (tree) {
 		pathNames = Object.keys(pathTree);
 	}
 	return {
-		key: menuKeyIndex ++,
+		key: pathKey ? `${pathKey}/${label}` : label,
 		label: label,
 		children: pathNames.map((pathName) => {
-			return getFilesMenu({[pathName]: pathTree[pathName]});
+			return getFilesMenu({[pathName]: pathTree[pathName]}, pathKey ? `${pathKey}/${label}` : label);
 		})
 	}
 }
 
 /**
- * 分解错误信息路径，并添加到树状结构中
- * @param {string} pathStr 
+ * @description: 分解错误信息路径，并添加到树状结构中
+ * @param {strng} pathStr
+ * @return {*}
  */
 function addFilePath(pathStr) {
 	const pathArr = pathStr.split('/');
@@ -63,34 +66,25 @@ function addFilePath(pathStr) {
 }
 
 /**
- * 对不同类型错误进行数量统计
- * @param {string} type 
- */
-function addErrTypeCount (type) {
-	if (reportData.errTypeCount[type]) {
-		reportData.errTypeCount[type] += 1;
-	} else {
-		reportData.errTypeCount[type] = 1;
-	}
-}
-
-/**
- * 在返回的内容中加入错误信息
- * @param {Object} errMessage 
+ * @description: 在返回的内容中加入错误信息
+ * @param {Object} errMessage
+ * @return {*}
  */
 function addErrMessage (errMessage) {
 	reportData.errMessage.push(errMessage);
 }
 
+/**
+ * @description: 重置报告数据信息
+ * @return {Object}
+ */
 export function getReportData() {
-	data.forEach((errMessage, index) => {
+	msgData.forEach((errMessage, index) => {
 		addFilePath(errMessage.filePath);
-		addErrTypeCount(errMessage.type);
 		addErrMessage(errMessage);
 	})
-	console.log(filesTree);
 	reportData.filesTree = getFilesMenu(filesTree);
-	console.log(reportData.filesTree);
+	console.log('!!!!!!!!!!!!!!!!tree: ', reportData);
 	return reportData;
 }
 
