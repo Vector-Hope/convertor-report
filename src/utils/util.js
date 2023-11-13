@@ -10,7 +10,7 @@ const reportData = {
 		pageNums: data.pageNums,
 		fileNums: data.fileNums,
 	},
-	filesTree: {},
+	filesMenu: {},
 	errMessage: [],
 };
 
@@ -70,8 +70,52 @@ function addFilePath(pathStr) {
  * @param {Object} errMessage
  * @return {*}
  */
-function addErrMessage (errMessage) {
-	reportData.errMessage.push(errMessage);
+function addErrMessage (errMessages) {
+	errMessages.forEach((errMessage) => {
+		const {pathKeys, pathLabels} = getErrMessagePathKeys(errMessage.filePath, reportData.filesMenu);
+		reportData.errMessage.push({
+			...errMessage,
+			pathKeys,
+			pathLabels,
+		});
+	})
+}
+
+/**
+ * @description: 获得异常信息路径对应的菜单键值
+ * @param {string} filePath
+ * @param {Array} filesMenu
+ * @return {Array}
+ */
+function getErrMessagePathKeys (filePath, filesMenu) {
+	let pathKeys = [];
+	let pathLabels = [];
+	for (let menuIndex in filesMenu) {
+		if (filePath === filesMenu[menuIndex].key) {
+			return {
+				pathKeys: [...pathKeys, filesMenu[menuIndex].key],
+				pathLabels: [...pathLabels, filesMenu[menuIndex].label],
+			};
+		}
+		if (filePath.startsWith(filesMenu[menuIndex].key)) {
+			pathKeys.push(filesMenu[menuIndex].key);
+			pathLabels.push(filesMenu[menuIndex].label);
+			if (filesMenu[menuIndex].children) {
+				const subPathKeys = getErrMessagePathKeys(filePath, filesMenu[menuIndex].children);
+				pathKeys.push(...subPathKeys.pathKeys);
+				pathLabels.push(...subPathKeys.pathLabels);
+			} else {
+				return {
+					pathKeys,
+					pathLabels
+				};
+			}
+		}
+	}
+	return {
+		pathKeys,
+		pathLabels
+	};
 }
 
 /**
@@ -79,11 +123,11 @@ function addErrMessage (errMessage) {
  * @return {Object}
  */
 export function getReportData() {
-	msgData.forEach((errMessage, index) => {
+	msgData.forEach((errMessage) => {
 		addFilePath(errMessage.filePath);
-		addErrMessage(errMessage);
 	})
-	reportData.filesTree = getFilesMenu(filesTree);
+	reportData.filesMenu = [getFilesMenu(filesTree)];
+	addErrMessage(msgData);
 	console.log('!!!!!!!!!!!!!!!!tree: ', reportData);
 	return reportData;
 }

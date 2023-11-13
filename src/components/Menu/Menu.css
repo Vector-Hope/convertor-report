@@ -27,7 +27,11 @@
 }
 
 .sub-menu-label {
-  padding-left: 16px;
+  margin: 6px 16px;
+  border-radius: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   transition: 0.3s;
   color: #252b3a;
 }

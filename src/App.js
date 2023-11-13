@@ -15,56 +15,47 @@ const reportData = getReportData();
 const menuItems = [
   {
     key: 'overView',
-    label: '迁移概览',
+    label: '转换概览',
   },
   {
     key: 'projectDirectory',
     label: '工程目录',
-    children: [reportData.filesTree],
+    children: reportData.filesMenu,
   }
 ]
 
-/**
- * @description: 获得默认展开的menu keyList
- * @return {Array}
- */
-function getDefaultOpenKeys () {
-  let projectDirectory = menuItems[1];
-  const openKeys = [projectDirectory['key']];
-  while (projectDirectory.children) {
-    projectDirectory = projectDirectory.children[0];
-    openKeys.push(projectDirectory['key']);
-  }
-  return openKeys;
-}
-
 function App() {
   let [selectKeys, setSelectKeys] = useState(['overView']);
-  let [openKeys, setOpenKeys] = useState(getDefaultOpenKeys());
   let [showBreadcrumb, setShowBreadcrumb] = useState([{title: '转换概览'}]);
 
   /**
    * @description: menu点击item获得选择的menu keyList
-   * @param {Array<string>} selectKeys
-   * @param {Array<string>} selectLabels
+   * @param {Array<string>} menuSelectKeys
+   * @param {Array<string>} menuSelectLabels
    * @return {*}
    */
-  const getSelectKeys = (selectKeys, selectLabels) => {
-    console.log(selectKeys);
-    if (selectKeys[0] === 'overView') {
-      setShowBreadcrumb([{
-        title: '转换概览',
-        onClick: (e) => {
-          console.log(selectKeys);
-        }
-      }]);
-      return;
-    }
-    let showBreadcrumb = selectLabels.map((label, index) => {
+  const getMenuSelectKeys = (menuSelectKeys, menuSelectLabels) => {
+    console.log(menuSelectKeys);
+    setSelectKeys([...menuSelectKeys]);
+    let showBreadcrumb = menuSelectLabels.map((label, index) => {
       return {
         title: label,
         onClick: (e) => {
-          console.log(selectKeys.splice(0, index))
+          console.log(menuSelectKeys.splice(0, index));
+        }
+      }
+    });
+    setShowBreadcrumb(showBreadcrumb);
+  }
+
+  const onChooseTableItem = (chooseKeys, chooseLabels) => {
+    console.log(chooseKeys);
+    // setSelectKeys(chooseKeys);
+    let showBreadcrumb = chooseLabels.map((label, index) => {
+      return {
+        title: label,
+        onClick: (e) => {
+          console.log(chooseKeys.splice(0, index))
         }
       }
     });
@@ -90,7 +81,7 @@ function App() {
         </div>
         <div className='convertor-report-name'>Convertor Report</div>
       </div>
-      <MyMenu menuItems={menuItems} openKeys={openKeys} selectKeys={selectKeys} getSelectKeys={getSelectKeys} />
+      <MyMenu menuItems={menuItems} selectKeys={selectKeys} getSelectKeys={getMenuSelectKeys} />
     </Sider>
     <Layout
       className='report-layout'
@@ -112,8 +103,12 @@ function App() {
             }}
           ></Breadcrumb>
         </div>
-        <ProjectDetail projectDetail={reportData.projectDetail} />
-        <MessageContent messageList={reportData.errMessage} />
+        {
+          selectKeys[0] === 'overView' ?
+          <ProjectDetail projectDetail={reportData.projectDetail} /> :
+          ''
+        }
+        <MessageContent messageList={reportData.errMessage} onChooseTableItem={onChooseTableItem} />
       </div>
     </Layout>
   </Layout>
