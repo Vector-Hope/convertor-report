@@ -1,11 +1,3 @@
-/*
- * @Author: Vector-Hope 297893@whut.edu.cn
- * @Date: 2023-10-24 10:17:31
- * @LastEditors: Vector-Hope 297893@whut.edu.cn
- * @LastEditTime: 2023-11-13 14:41:38
- * @FilePath: \convertor-report\src\components\MessageContent\MessageContent.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import { Layout, Table } from 'antd';
 import { useState } from 'react';
 import './MessageContent.css';
@@ -19,7 +11,7 @@ const { Content } = Layout;
 function initMessageList(messageList) {
   const filePathFilters = [];
   const titleFilters = [];
-  const resetMessageList = messageList.map((message, index) => {
+  const resetMessageList = messageList.map((message) => {
     const { filePath, title, pathKeys, pathLabels } = message;
     if (!filePathFilters.includes(filePath)) {
       filePathFilters.push(filePath);
@@ -76,7 +68,11 @@ function initMessageList(messageList) {
 
 function MessageContent({messageList, onChooseTableItem}) {
   const [messageTable, setMessageTable] = useState(initMessageList(messageList));
-
+  /**
+   * @description: 点击异常列表中的某项的回调
+   * @param {Object} record
+   * @return {*}
+   */
   const chooseMessage = (record) => {
     console.log(record);
     onChooseTableItem(record.pathKeys, record.pathLabels);

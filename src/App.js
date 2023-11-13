@@ -11,19 +11,6 @@ const { Sider } = Layout;
 
 const reportData = getReportData();
 
-// 初始化菜单列表
-const menuItems = [
-  {
-    key: 'overView',
-    label: '转换概览',
-  },
-  {
-    key: 'projectDirectory',
-    label: '工程目录',
-    children: reportData.filesMenu,
-  }
-]
-
 function App() {
   let [selectKeys, setSelectKeys] = useState(['overView']);
   let [showBreadcrumb, setShowBreadcrumb] = useState([{title: '转换概览'}]);
@@ -37,25 +24,34 @@ function App() {
   const getMenuSelectKeys = (menuSelectKeys, menuSelectLabels) => {
     console.log(menuSelectKeys);
     setSelectKeys([...menuSelectKeys]);
-    let showBreadcrumb = menuSelectLabels.map((label, index) => {
-      return {
-        title: label,
-        onClick: (e) => {
-          console.log(menuSelectKeys.splice(0, index));
-        }
-      }
-    });
-    setShowBreadcrumb(showBreadcrumb);
+    changeShowBreadcrumb(menuSelectKeys, menuSelectLabels);
   }
 
+  /**
+   * @description: 点击异常列表时触发的事件
+   * @param {Array<string>} chooseKeys
+   * @param {Array<string>} chooseLabels
+   * @return {*}
+   */
   const onChooseTableItem = (chooseKeys, chooseLabels) => {
-    console.log(chooseKeys);
-    // setSelectKeys(chooseKeys);
-    let showBreadcrumb = chooseLabels.map((label, index) => {
+    setSelectKeys(chooseKeys);
+    changeShowBreadcrumb(chooseKeys, chooseLabels);
+    
+  }
+  
+  /**
+   * @description: 改变面包屑显示内容
+   * @param {Array<string>} keys
+   * @param {Array<string>} labels
+   * @return {*}
+   */
+  const changeShowBreadcrumb = (keys, labels) => {
+    let showBreadcrumb = labels.map((label, index) => {
       return {
         title: label,
         onClick: (e) => {
-          console.log(chooseKeys.splice(0, index))
+          // todo 点击面包屑回调
+          console.log(keys.splice(0, index))
         }
       }
     });
@@ -81,7 +77,7 @@ function App() {
         </div>
         <div className='convertor-report-name'>Convertor Report</div>
       </div>
-      <MyMenu menuItems={menuItems} selectKeys={selectKeys} getSelectKeys={getMenuSelectKeys} />
+      <MyMenu menuItems={reportData.filesMenu} selectKeys={selectKeys} getSelectKeys={getMenuSelectKeys} />
     </Sider>
     <Layout
       className='report-layout'

@@ -5,10 +5,10 @@ const msgData =  data.errMsgList;
 // 定义重置报告数据结构
 const reportData = {
 	projectDetail: {
-		projectName: data.projectName,
-		projectPath: data.projectPath,
-		pageNums: data.pageNums,
-		fileNums: data.fileNums,
+		projectName: data.projectName || '未定义',
+		projectPath: data.projectPath || '未知',
+		pageNums: data.pageNums || 0,
+		fileNums: data.fileNums || 0,
 	},
 	filesMenu: {},
 	errMessage: [],
@@ -51,17 +51,18 @@ function getFilesMenu (tree, pathKey = '') {
 
 /**
  * @description: 分解错误信息路径，并添加到树状结构中
- * @param {strng} pathStr
  * @return {*}
  */
-function addFilePath(pathStr) {
-	const pathArr = pathStr.split('/');
-	let tree = filesTree;
-	pathArr.forEach((path) => {
-		if (!tree[path]) {
-			tree[path] = {};
-		}
-		tree = tree[path];
+function addFilePath() {
+	msgData.forEach((errMessage) => {
+		const pathArr = errMessage.filePath.split('/');
+		let tree = filesTree;
+		pathArr.forEach((path) => {
+			if (!tree[path]) {
+				tree[path] = {};
+			}
+			tree = tree[path];
+		})
 	})
 }
 
@@ -70,13 +71,13 @@ function addFilePath(pathStr) {
  * @param {Object} errMessage
  * @return {*}
  */
-function addErrMessage (errMessages) {
+function addErrMessage (errMessages, projectFilesMenu) {
 	errMessages.forEach((errMessage) => {
-		const {pathKeys, pathLabels} = getErrMessagePathKeys(errMessage.filePath, reportData.filesMenu);
+		const {pathKeys, pathLabels} = getErrMessagePathKeys(errMessage.filePath, projectFilesMenu);
 		reportData.errMessage.push({
 			...errMessage,
-			pathKeys,
-			pathLabels,
+			pathKeys: ['projectDirectory', ...pathKeys],
+			pathLabels: ['工程目录', ...pathLabels],
 		});
 	})
 }
@@ -84,8 +85,8 @@ function addErrMessage (errMessages) {
 /**
  * @description: 获得异常信息路径对应的菜单键值
  * @param {string} filePath
- * @param {Array} filesMenu
- * @return {Array}
+ * @param {Array<Object>} filesMenu
+ * @return {Object}
  */
 function getErrMessagePathKeys (filePath, filesMenu) {
 	let pathKeys = [];
@@ -123,11 +124,20 @@ function getErrMessagePathKeys (filePath, filesMenu) {
  * @return {Object}
  */
 export function getReportData() {
-	msgData.forEach((errMessage) => {
-		addFilePath(errMessage.filePath);
-	})
-	reportData.filesMenu = [getFilesMenu(filesTree)];
-	addErrMessage(msgData);
+		addFilePath();
+	const projectFilesMenu = [getFilesMenu(filesTree)];
+	reportData.filesMenu = [
+		{
+			key: 'overView',
+			label: '转换概览',
+		},
+		{
+			key: 'projectDirectory',
+			label: '工程目录',
+			children: projectFilesMenu,
+		}
+	];
+	addErrMessage(msgData, projectFilesMenu);
 	console.log('!!!!!!!!!!!!!!!!tree: ', reportData);
 	return reportData;
 }
