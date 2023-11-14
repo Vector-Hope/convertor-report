@@ -1,20 +1,18 @@
 import data from '../resource/reportData.json';
 
-const msgData =  data.errMsgList;
+const msgData = data.errMsgList;
 
 // 定义重置报告数据结构
 const reportData = {
-	projectDetail: {
-		projectName: data.projectName || '未定义',
-		projectPath: data.projectPath || '未知',
-		pageNums: data.pageNums || 0,
-		fileNums: data.fileNums || 0,
-	},
-	filesMenu: {},
-	errMessage: [],
+  projectDetail: {
+    projectName: data.projectName || '未定义',
+    projectPath: data.projectPath || '未知',
+    pageNums: data.pageNums || 0,
+    fileNums: data.fileNums || 0,
+  },
+  filesMenu: {},
+  errMessage: [],
 };
-
-let filesTree = {};
 
 /**
  * @description: 获得工程文件目录信息
@@ -22,48 +20,79 @@ let filesTree = {};
  * @param {string} pathKey
  * @return {Object}
  */
-function getFilesMenu (tree, pathKey = '') {
-	let pathTree = tree;
-	let pathNames = Object.keys(pathTree);
-	let label = pathNames[0];
-	pathTree = pathTree[pathNames[0]];
-	pathNames = Object.keys(pathTree);
+function getFilesMenu(tree, pathKey = '') {
+  let pathTree = tree;
+  let pathNames = Object.keys(pathTree);
+  let label = pathNames[0];
+  pathTree = pathTree[pathNames[0]];
+  pathNames = Object.keys(pathTree);
+  // 当该文件为最终的文件，而不是文件夹时，返回menu信息
+  if (pathNames.length === 0) {
+    const key = pathKey ? `${pathKey}/${label}` : label;
+    return {
+      [key]: {
+        key: key,
+        label: label,
+        type: 'menuItem',
+        isOpen: false,
+        isSelect: false,
+      },
+    };
+  }
+  // 当该目录下只有一个文件，且这个文件是文件夹时，将pathName相连
+  while (pathNames.length === 1 && Object.keys(pathTree[pathNames[0]]).length !== 0) {
+    label = label + '/' + pathNames[0];
+    pathTree = pathTree[pathNames[0]];
+    pathNames = Object.keys(pathTree);
+  }
+  const key = pathKey ? `${pathKey}/${label}` : label;
+  let children = {};
+  pathNames.forEach((pathName) => {
+    children = { ...children, ...getFilesMenu({ [pathName]: pathTree[pathName] }, key) };
+  });
+  return {
+    [key]: {
+      key: key,
+      label: label,
+      type: 'menuGroup',
+      isOpen: false,
+      isSelect: false,
+      children: children,
+    },
+  };
+}
 
-	if (pathNames.length === 0) {
-		return {
-			key: pathKey ? `${pathKey}/${label}` : label,
-			label: label
-		}
-	}
-	while (pathNames.length === 1 && Object.keys(pathTree[pathNames[0]]).length !== 0) {
-		label = label +'/' + pathNames[0];
-		pathTree = pathTree[pathNames[0]];
-		pathNames = Object.keys(pathTree);
-	}
-	return {
-		key: pathKey ? `${pathKey}/${label}` : label,
-		label: label,
-		children: pathNames.map((pathName) => {
-			return getFilesMenu({[pathName]: pathTree[pathName]}, pathKey ? `${pathKey}/${label}` : label);
-		})
-	}
+function defaultOpen(filesMenu) {
+  if (!filesMenu) {
+    return;
+  }
+  if (typeof filesMenu === 'object') {
+    const pathKeys = Object.keys(filesMenu).sort();
+    filesMenu[pathKeys[0]].isOpen = true;
+    if (filesMenu[pathKeys[0]].children) {
+      defaultOpen(filesMenu[pathKeys[0]].children);
+    }
+  }
 }
 
 /**
  * @description: 分解错误信息路径，并添加到树状结构中
- * @return {*}
+ * @param {Array<Object>} msgData
+ * @return {Object}
  */
-function addFilePath() {
-	msgData.forEach((errMessage) => {
-		const pathArr = errMessage.filePath.split('/');
-		let tree = filesTree;
-		pathArr.forEach((path) => {
-			if (!tree[path]) {
-				tree[path] = {};
-			}
-			tree = tree[path];
-		})
-	})
+function getFilesTree(msgData) {
+  const filesTree = {};
+  msgData.forEach((errMessage) => {
+    const pathArr = errMessage.filePath.split('/');
+    let tree = filesTree;
+    pathArr.forEach((path) => {
+      if (!tree[path]) {
+        tree[path] = {};
+      }
+      tree = tree[path];
+    });
+  });
+  return filesTree;
 }
 
 /**
@@ -71,15 +100,15 @@ function addFilePath() {
  * @param {Object} errMessage
  * @return {*}
  */
-function addErrMessage (errMessages, projectFilesMenu) {
-	errMessages.forEach((errMessage) => {
-		const {pathKeys, pathLabels} = getErrMessagePathKeys(errMessage.filePath, projectFilesMenu);
-		reportData.errMessage.push({
-			...errMessage,
-			pathKeys: ['projectDirectory', ...pathKeys],
-			pathLabels: ['工程目录', ...pathLabels],
-		});
-	})
+function addErrMessage(errMessages, projectFilesMenu) {
+  errMessages.forEach((errMessage) => {
+    const { pathKeys, pathLabels } = getErrMessagePathKeys(errMessage.filePath, projectFilesMenu);
+    reportData.errMessage.push({
+      ...errMessage,
+      pathKeys: ['projectDirectory', ...pathKeys],
+      pathLabels: ['工程目录', ...pathLabels],
+    });
+  });
 }
 
 /**
@@ -88,35 +117,35 @@ function addErrMessage (errMessages, projectFilesMenu) {
  * @param {Array<Object>} filesMenu
  * @return {Object}
  */
-function getErrMessagePathKeys (filePath, filesMenu) {
-	let pathKeys = [];
-	let pathLabels = [];
-	for (let menuIndex in filesMenu) {
-		if (filePath === filesMenu[menuIndex].key) {
-			return {
-				pathKeys: [...pathKeys, filesMenu[menuIndex].key],
-				pathLabels: [...pathLabels, filesMenu[menuIndex].label],
-			};
-		}
-		if (filePath.startsWith(filesMenu[menuIndex].key)) {
-			pathKeys.push(filesMenu[menuIndex].key);
-			pathLabels.push(filesMenu[menuIndex].label);
-			if (filesMenu[menuIndex].children) {
-				const subPathKeys = getErrMessagePathKeys(filePath, filesMenu[menuIndex].children);
-				pathKeys.push(...subPathKeys.pathKeys);
-				pathLabels.push(...subPathKeys.pathLabels);
-			} else {
-				return {
-					pathKeys,
-					pathLabels
-				};
-			}
-		}
-	}
-	return {
-		pathKeys,
-		pathLabels
-	};
+function getErrMessagePathKeys(filePath, filesMenu) {
+  let pathKeys = [];
+  let pathLabels = [];
+  for (let menuIndex in filesMenu) {
+    if (filePath === filesMenu[menuIndex].key) {
+      return {
+        pathKeys: [...pathKeys, filesMenu[menuIndex].key],
+        pathLabels: [...pathLabels, filesMenu[menuIndex].label],
+      };
+    }
+    if (filePath.startsWith(filesMenu[menuIndex].key)) {
+      pathKeys.push(filesMenu[menuIndex].key);
+      pathLabels.push(filesMenu[menuIndex].label);
+      if (filesMenu[menuIndex].children) {
+        const subPathKeys = getErrMessagePathKeys(filePath, filesMenu[menuIndex].children);
+        pathKeys.push(...subPathKeys.pathKeys);
+        pathLabels.push(...subPathKeys.pathLabels);
+      } else {
+        return {
+          pathKeys,
+          pathLabels,
+        };
+      }
+    }
+  }
+  return {
+    pathKeys,
+    pathLabels,
+  };
 }
 
 /**
@@ -124,24 +153,29 @@ function getErrMessagePathKeys (filePath, filesMenu) {
  * @return {Object}
  */
 export function getReportData() {
-		addFilePath();
-	const projectFilesMenu = [getFilesMenu(filesTree)];
-	reportData.filesMenu = [
-		{
-			key: 'overView',
-			label: '转换概览',
-		},
-		{
-			key: 'projectDirectory',
-			label: '工程目录',
-			children: projectFilesMenu,
-		}
-	];
-	addErrMessage(msgData, projectFilesMenu);
-	console.log('!!!!!!!!!!!!!!!!tree: ', reportData);
-	return reportData;
+  const errMsgList = data.errMsgList;
+  const filesTree = getFilesTree(errMsgList);
+  const projectFilesMenu = getFilesMenu(filesTree);
+  defaultOpen(projectFilesMenu);
+  console.log(projectFilesMenu);
+  reportData.filesMenu = {
+    overView: {
+      key: 'overView',
+      label: '转换概览',
+      isOpen: false,
+      isSelect: true,
+      type: 'menuItem',
+    },
+    projectDirectory: {
+      key: 'projectDirectory',
+      label: '工程目录',
+      isOpen: true,
+      isSelect: false,
+      type: 'menuGroup',
+      children: projectFilesMenu,
+    },
+  };
+  addErrMessage(msgData, projectFilesMenu);
+  console.log('!!!!!!!!!!!!!!!!tree: ', reportData);
+  return reportData;
 }
-
-
-
-

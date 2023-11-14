@@ -24,10 +24,9 @@ function initMessageList(messageList) {
       title: title,
       pathKeys: pathKeys,
       pathLabels: pathLabels,
-      messageNum: message.errCodeList.length
-    }
-  })
-  console.log(resetMessageList, filePathFilters);
+      messageNum: message.errCodeList.length,
+    };
+  });
   const columns = [
     {
       title: '路径',
@@ -35,11 +34,11 @@ function initMessageList(messageList) {
       filters: filePathFilters.map((path) => {
         return {
           text: path,
-          value: path
-        }
+          value: path,
+        };
       }),
       onFilter: (value, record) => record.filePath.indexOf(value) === 0,
-      width: 450
+      width: 450,
     },
     {
       title: '概述',
@@ -47,26 +46,26 @@ function initMessageList(messageList) {
       filters: titleFilters.map((title) => {
         return {
           text: title,
-          value: title
-        }
+          value: title,
+        };
       }),
       onFilter: (value, record) => record.title.indexOf(value) === 0,
-      width: 650
+      width: 650,
     },
     {
       title: '数量',
       dataIndex: 'messageNum',
-      width: 340
+      width: 340,
     },
   ];
 
   return {
     columns,
     data: [...resetMessageList],
-  }
+  };
 }
 
-function MessageContent({messageList, onChooseTableItem}) {
+function MessageContent({ messageList, onChooseTableItem }) {
   const [messageTable, setMessageTable] = useState(initMessageList(messageList));
   /**
    * @description: 点击异常列表中的某项的回调
@@ -76,27 +75,27 @@ function MessageContent({messageList, onChooseTableItem}) {
   const chooseMessage = (record) => {
     console.log(record);
     onChooseTableItem(record.pathKeys, record.pathLabels);
-  }
+  };
   return (
-      <Content className='report-message-content'>
-        <div className='report-message-card'>
-          <div className='report-message-title'>转换异常列表</div>
-          <Table
-            size='small'
-            columns={messageTable.columns}
-            dataSource={messageTable.data}
-            rowKey={(record, index) => index}
-            rowClassName={(record, index) => 'report-message-detail'}
-            onRow={(record) => {
-              return {
-                onClick: (e) => {
-                  chooseMessage(record);
-                }
-              }
-            }}
-          />
-        </div>
-      </Content>
+    <Content className='report-message-content'>
+      <div className='report-message-card'>
+        <div className='report-message-title'>转换异常列表</div>
+        <Table
+          size='small'
+          columns={messageTable.columns}
+          dataSource={messageTable.data}
+          rowKey={(record, index) => index}
+          rowClassName={(record, index) => 'report-message-detail'}
+          onRow={(record) => {
+            return {
+              onClick: (e) => {
+                chooseMessage(record);
+              },
+            };
+          }}
+        />
+      </div>
+    </Content>
   );
 }
 

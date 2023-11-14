@@ -6,7 +6,6 @@ type MenuItem = {
   type: MenuItemType,
   isOpen: boolean,
   isSelect: boolean,
-  Icon?: string,
   chlidren?: Array<MenuItem>
 }
 

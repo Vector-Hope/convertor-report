@@ -1,100 +1,74 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
+import arrowPng from '../../static/arrow.png';
+import filePng from '../../static/file.png';
+import folderOpenPng from '../../static/folder_open.png';
+import folderClosePng from '../../static/folder_close.png';
 import './Menu.css';
-/**
- * @description: 初始化菜单信息，获得默认选择菜单
- * @param {Array} menuItems
- * @return {Array}
- */
-function initMenuItems(menuItems, selectKeys) {
-  let resetMenuItems = getResetMenu(menuItems);
-  selectMenuGroup([...selectKeys], resetMenuItems);
-  return resetMenuItems;
-}
-
-/**
- * @description: 添加必需的菜单信息，添加type, isOpen, isSelect字段
- * @param {*} menuItems
- * @return {*}
- */
-function getResetMenu (menuItems) {
-  let resetMenuItems = {};
-  if (!menuItems || !Array.isArray(menuItems)) {
-    console.warn('传入菜单信息为空，或不为数组\n', menuItems);
-    return {};
-  }
-  // 以menuItem的key属性为menuItem的索引
-  for (let itemIndex in menuItems) {
-    if (menuItems[itemIndex].children) {
-      resetMenuItems[menuItems[itemIndex].key] = {
-        ...menuItems[itemIndex],
-        type: 'menuGroup',
-        isOpen: false,
-        isSelect: false,
-        children: getResetMenu(menuItems[itemIndex].children),
-      }
-    } else {
-      resetMenuItems[menuItems[itemIndex].key] = {
-        ...menuItems[itemIndex],
-        type: 'menuItem',
-        isOpen: false,
-        isSelect: false,
-      }
-    }
-    // 默认打开工程目录的第一项
-    if (menuItems[itemIndex].key === 'projectDirectory' || itemIndex === '0') {
-      resetMenuItems[menuItems[itemIndex].key].isOpen = true
-    }
-  }
-  return resetMenuItems;
-}
 
 /**
  * @description: 选择菜单
  * @param {Array} keys
  * @param {Object} menuItems
- * @return {boolean}
+ * @return {*}
  */
 function selectMenuGroup(keys, menuItems) {
-  if (keys.length === 0) {
-    return false;
-  }
-  const key = keys.shift();
-  if (keys.length) {
-    const lastMenuItemIsOpen = selectMenuGroup(keys, menuItems[key].children);
-    if (!menuItems[key].isOpen) {
-      menuItems[key].isOpen = lastMenuItemIsOpen;
-    }
-  } else {
-    menuItems[key].isSelect = true;
-    if (menuItems[key].children) {
-      menuItems[key].isOpen = !menuItems[key].isOpen;
+  cancelSelect(menuItems);
+  let nextMenuItem = menuItems;
+  let keysLen = keys.length;
+  keys.forEach((key, index) => {
+    if (index === keysLen - 1) {
+      nextMenuItem[key].isSelect = true;
     } else {
-      menuItems[key].isOpen = true;
+      nextMenuItem = nextMenuItem[key].children;
     }
-  }
-  return menuItems[key].isOpen;
+  });
+}
+
+/**
+ * @description: 打开菜单
+ * @param {Array} keys
+ * @param {Object} menuItems
+ * @return {*}
+ */
+function openMenuGroup(keys, menuItems) {
+  let nextMenuItem = menuItems;
+  let keysLen = keys.length;
+  keys.forEach((key, index) => {
+    if (index === keysLen - 1) {
+      nextMenuItem[key].isOpen = !nextMenuItem[key].isOpen;
+    } else {
+      nextMenuItem[key].isOpen = true;
+      nextMenuItem = nextMenuItem[key].children;
+    }
+  });
 }
 
 /**
  * @description: 取消选择，用于显示最终被选择的item
  * @param {Object} menuItems
- * @return {Object}
- */  
-function cancelSelect (menuItems) {
+ * @return {*}
+ */
+function cancelSelect(menuItems) {
   for (let item in menuItems) {
     menuItems[item].isSelect = false;
     if (menuItems[item].children) {
       cancelSelect(menuItems[item].children);
     }
   }
-  return menuItems;
 }
 
-function Menu({menuItems, selectKeys, getSelectKeys}) {
-  let [resetMenuItems, setResetMenuItems] = useState(initMenuItems(menuItems, selectKeys));
-  let resetMenuItemKeys = Object.keys(resetMenuItems);
+function Menu({ menuItems, selectKeys, getSelectKeys }) {
+  let [showMenuItems, setShowMenuItems] = useState(menuItems);
+  let showMenuItemKeys = Object.keys(showMenuItems).sort();
 
+  useEffect(() => {
+    console.log('effect: ', selectKeys);
+    let allMenuItems = { ...showMenuItems };
+    openMenuGroup(selectKeys, allMenuItems);
+    selectMenuGroup(selectKeys, allMenuItems);
+    setShowMenuItems(allMenuItems);
+  }, [selectKeys]);
   /**
    * @description: 触发选择菜单
    * @param {Array} keys
@@ -103,86 +77,99 @@ function Menu({menuItems, selectKeys, getSelectKeys}) {
   const selectMenuGroupTrigger = (keys) => {
     return (e) => {
       getSelectlabel(keys);
-      let allMenuItems = cancelSelect({...resetMenuItems});
-      selectMenuGroup(keys, allMenuItems);
-      setResetMenuItems(allMenuItems);
-    }
-  }
+    };
+  };
 
   /**
    * @description: 获得被选择的树状内容的label，并传回父组件
    * @param {Array} keys
    * @return {string}
-   */  
+   */
   const getSelectlabel = (keys) => {
-    let allMenuItems = resetMenuItems;
+    let allMenuItems = showMenuItems;
     let labels = keys.map((key) => {
       const label = allMenuItems[key].label;
       allMenuItems = allMenuItems[key].children;
       return label;
-    })
+    });
     getSelectKeys(keys, labels);
-  }
+  };
+
+  const subMenuIcon = (subMenuItem) => {
+    if (subMenuItem.type === 'menuItem') {
+      return <img src={filePng} alt='file' />;
+    } else {
+      return <img src={subMenuItem.isOpen ? folderOpenPng : folderClosePng} alt='folder' />;
+    }
+  };
 
   const subMenu = (subMenuItems, upperKeys) => {
-    let subMenuItemKeys = Object.keys(subMenuItems);
+    let subMenuItemKeys = Object.keys(subMenuItems).sort();
     return (
       <div className='sub-menu-wrapper'>
-        {
-          subMenuItemKeys.map((key) => {
-            return (
-              <div key={key}>
-                <div>
-                  <div
-                    className={`sub-menu-label ${subMenuItems[key].isSelect ? 'sub-menu-selected' : ''}`}
-                    onClick={selectMenuGroupTrigger([...upperKeys, key])}
-                    style={{
-                      paddingLeft: `${(upperKeys.length - 1) * 20}px`
-                    }}
-                  >
-                    {subMenuItems[key].label}
-                  </div>
-                </div>
-                  {
-                    subMenuItems[key].children ? 
-                    <div className={`sub-menu ${subMenuItems[key].isOpen ? 'sub-menu-open': 'sub-menu-close'}`}>
-                      {subMenu(subMenuItems[key].children, [...upperKeys, key])}
-                    </div> :
+        {subMenuItemKeys.map((key) => {
+          return (
+            <div key={key}>
+              <div>
+                <div
+                  className={`sub-menu-label ${subMenuItems[key].isSelect ? 'sub-menu-selected' : ''}`}
+                  onClick={selectMenuGroupTrigger([...upperKeys, key])}
+                  style={{
+                    paddingLeft: `${(upperKeys.length - 1) * 20}px`,
+                  }}
+                >
+                  {subMenuItems[key].type === 'menuGroup' ? (
+                    <div className='sub-menu-arrow'>
+                      <img
+                        className={subMenuItems[key].isOpen ? 'menu-arrow-open' : 'menu-arrow-close'}
+                        src={arrowPng}
+                        alt='arrow'
+                      />
+                    </div>
+                  ) : (
                     ''
-                  }
+                  )}
+                  <div className='sub-menu-icon'>{subMenuIcon(subMenuItems[key])}</div>
+                  {subMenuItems[key].label}
+                </div>
               </div>
-            )
-          })
-        }
+              {subMenuItems[key].children ? (
+                <div className={`sub-menu ${subMenuItems[key].isOpen ? 'sub-menu-open' : 'sub-menu-close'}`}>
+                  {subMenu(subMenuItems[key].children, [...upperKeys, key])}
+                </div>
+              ) : (
+                ''
+              )}
+            </div>
+          );
+        })}
       </div>
     );
-  }
+  };
 
   return (
     <div>
-      {
-        resetMenuItemKeys.map((key) => {
-          return (
-            <div className='menu-group-wrapper' key={key}>
-              <div>
-                <div
-                  className={`menu-label ${resetMenuItems[key].isSelect ? 'menu-label-selected': ''}`}
-                  onClick={selectMenuGroupTrigger([key])}
-                >
-                  {resetMenuItems[key].label}
-                </div>
+      {showMenuItemKeys.map((key) => {
+        return (
+          <div className='menu-group-wrapper' key={key}>
+            <div className={`${key}${showMenuItems[key].isOpen ? '-menu-open' : ''}`}>
+              <div
+                className={`menu-label ${showMenuItems[key].isSelect ? 'menu-label-selected' : ''}`}
+                onClick={selectMenuGroupTrigger([key])}
+              >
+                {showMenuItems[key].label}
               </div>
-              {
-                resetMenuItems[key].children ?
-                  <div className={`sub-menu ${resetMenuItems[key].isOpen ? 'sub-menu-open' : 'sub-menu-close'}`}>
-                    {subMenu(resetMenuItems[key].children, [key], resetMenuItems[key].isOpen)}
-                  </div> :
-                  ''
-              }
             </div>
-          )
-        })
-      }
+            {showMenuItems[key].children ? (
+              <div className={`sub-menu ${showMenuItems[key].isOpen ? 'sub-menu-open' : 'sub-menu-close'}`}>
+                {subMenu(showMenuItems[key].children, [key], showMenuItems[key].isOpen)}
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

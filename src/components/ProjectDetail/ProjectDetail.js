@@ -2,7 +2,7 @@ import { Layout } from 'antd';
 import './ProjectDetail.css';
 const { Content } = Layout;
 
-function ProjectDetail({projectDetail}) {
+function ProjectDetail({ projectDetail }) {
   return (
     <Content className='project-detail-content'>
       <div className='project-detail-card'>

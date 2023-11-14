@@ -22,8 +22,12 @@
   background-color: #e9edfa;
 }
 
-.sub-menu-wrapper {
-  /* padding-left: 16px; */
+.projectDirectory-menu-open {
+  border-bottom: 1px solid #eef0f5;
+}
+
+.projectDirectory-menu-open .menu-label-selected {
+  border-radius: 4px 4px 0 0;
 }
 
 .sub-menu-label {
@@ -34,6 +38,31 @@
   white-space: nowrap;
   transition: 0.3s;
   color: #252b3a;
+  display: flex;
+}
+
+.sub-menu-icon {
+  height: 16px;
+  margin: 4px;
+}
+
+.sub-menu-icon img {
+  height: 16px;
+  width: 16px;
+}
+
+.sub-menu-arrow img {
+  height: 8px;
+  width: 8px;
+  transition: 0.3s;
+}
+
+.menu-arrow-open {
+  transform: rotate(0);
+}
+
+.menu-arrow-close {
+  transform: rotate(-90deg);
 }
 
 .sub-menu-selected {
