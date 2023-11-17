@@ -7,8 +7,8 @@ const reportData = {
   projectDetail: {
     projectName: data.projectName || '未定义',
     projectPath: data.projectPath || '未知',
-    pageNums: data.pageNums || 0,
-    fileNums: data.fileNums || 0,
+    pagesNum: data.pagesNum || 0,
+    filesNum: data.filesNum || 0,
   },
   filesMenu: {},
   errMessage: [],
@@ -105,6 +105,7 @@ function addErrMessage(errMessages, projectFilesMenu) {
     const { pathKeys, pathLabels } = getErrMessagePathKeys(errMessage.filePath, projectFilesMenu);
     reportData.errMessage.push({
       ...errMessage,
+      messageNum: errMessage.errCodeList.length,
       pathKeys: ['projectDirectory', ...pathKeys],
       pathLabels: ['工程目录', ...pathLabels],
     });
@@ -157,7 +158,6 @@ export function getReportData() {
   const filesTree = getFilesTree(errMsgList);
   const projectFilesMenu = getFilesMenu(filesTree);
   defaultOpen(projectFilesMenu);
-  console.log(projectFilesMenu);
   reportData.filesMenu = {
     overView: {
       key: 'overView',
@@ -176,6 +176,5 @@ export function getReportData() {
     },
   };
   addErrMessage(msgData, projectFilesMenu);
-  console.log('!!!!!!!!!!!!!!!!tree: ', reportData);
   return reportData;
 }

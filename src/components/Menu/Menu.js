@@ -63,7 +63,6 @@ function Menu({ menuItems, selectKeys, getSelectKeys }) {
   let showMenuItemKeys = Object.keys(showMenuItems).sort();
 
   useEffect(() => {
-    console.log('effect: ', selectKeys);
     let allMenuItems = { ...showMenuItems };
     openMenuGroup(selectKeys, allMenuItems);
     selectMenuGroup(selectKeys, allMenuItems);

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Breadcrumb, Layout } from 'antd';
 import ProjectDetail from './components/ProjectDetail/ProjectDetail';
 import MessageContent from './components/MessageContent/MessageContent';
-import MyMenu from './components/Menu/Menu';
+import Menu from './components/Menu/Menu';
+import MessageDetail from './components/MessageDetail/MessageDetail';
 import convertLog from './static/convert.png';
 import { getReportData } from './utils/util';
 import './App.css';
@@ -14,7 +15,9 @@ const reportData = getReportData();
 function App() {
   let [selectKeys, setSelectKeys] = useState(['overView']);
   let [showBreadcrumb, setShowBreadcrumb] = useState([{ title: '转换概览' }]);
-
+  let [isShowTable, setIsShowTable] = useState(true);
+  let [errMsgList, setErrMsgList] = useState([...reportData.errMessage]);
+  let [showMsgDetail, setShowMsgDetail] = useState({});
   /**
    * @description: menu点击item获得选择的menu keyList
    * @param {Array<string>} menuSelectKeys
@@ -22,8 +25,9 @@ function App() {
    * @return {*}
    */
   const getMenuSelectKeys = (menuSelectKeys, menuSelectLabels) => {
-    console.log(menuSelectKeys);
     setSelectKeys([...menuSelectKeys]);
+    setIsShowTable(true);
+    filtErrMsgList(menuSelectKeys);
     changeShowBreadcrumb(menuSelectKeys, menuSelectLabels);
   };
 
@@ -33,9 +37,11 @@ function App() {
    * @param {Array<string>} chooseLabels
    * @return {*}
    */
-  const onChooseTableItem = (chooseKeys, chooseLabels) => {
-    setSelectKeys(chooseKeys);
-    changeShowBreadcrumb(chooseKeys, chooseLabels);
+  const onChooseTableItem = (chooseMessage) => {
+    setSelectKeys(chooseMessage.pathKeys);
+    setIsShowTable(false);
+    changeShowBreadcrumb([...chooseMessage.pathKeys, 'msgDetail'], [...chooseMessage.pathLabels, '转换详情']);
+    setShowMsgDetail(chooseMessage);
   };
 
   /**
@@ -45,16 +51,57 @@ function App() {
    * @return {*}
    */
   const changeShowBreadcrumb = (keys, labels) => {
-    let showBreadcrumb = labels.map((label, index) => {
+    let showBreadcrumb;
+    showBreadcrumb = labels.map(createBreadcrumbEvents(keys, labels));
+    setShowBreadcrumb(showBreadcrumb);
+  };
+
+  /**
+   * @description: 创建面包屑点击事件
+   * @param {Array<string>} keys
+   * @param {Array<string>} labels
+   * @return {Function}
+   */
+  const createBreadcrumbEvents = (keys, labels) => {
+    return (label, index) => {
       return {
         title: label,
         onClick: (e) => {
           // todo 点击面包屑回调
-          console.log(keys.splice(0, index));
+          if (keys[index] === 'msgDetail') {
+            return;
+          }
+          const selectKeys = [...keys].splice(0, index + 1);
+          const selectLabels = [...labels].splice(0, index + 1);
+          console.log(selectKeys);
+          setIsShowTable(true);
+          setSelectKeys(selectKeys);
+          if (keys[0] !== 'overView') {
+            filtErrMsgList(selectKeys);
+          }
+          changeShowBreadcrumb(selectKeys, selectLabels);
         },
       };
+    };
+  };
+  /**
+   * @description: 筛选errMsgList当中符合当前路径的子项
+   * @param {Array<string>} keys
+   * @return {*}
+   */
+  const filtErrMsgList = (keys) => {
+    if (keys[0] === 'overView') {
+      setErrMsgList(reportData.errMessage);
+      return;
+    }
+    let newErrMsgList = reportData.errMessage.filter((errMsg) => {
+      const errMsgKeys = errMsg.pathKeys;
+      const errMsgKeysLen = errMsgKeys.length;
+      return keys.every((key, index) => {
+        return index < errMsgKeysLen && key === errMsgKeys[index];
+      });
     });
-    setShowBreadcrumb(showBreadcrumb);
+    setErrMsgList(newErrMsgList);
   };
 
   return (
@@ -76,7 +123,7 @@ function App() {
           </div>
           <div className='convertor-report-name'>Convertor Report</div>
         </div>
-        <MyMenu menuItems={reportData.filesMenu} selectKeys={selectKeys} getSelectKeys={getMenuSelectKeys} />
+        <Menu menuItems={reportData.filesMenu} selectKeys={selectKeys} getSelectKeys={getMenuSelectKeys} />
       </Sider>
       <Layout
         className='report-layout'
@@ -92,14 +139,17 @@ function App() {
               items={showBreadcrumb}
               separator='>'
               style={{
-                fontFamily: 'HarmonyOS_Sans_SC',
-                fontWeight: 'medium',
                 fontSize: '18px',
+                cursor: 'pointer',
               }}
             ></Breadcrumb>
           </div>
           {selectKeys[0] === 'overView' ? <ProjectDetail projectDetail={reportData.projectDetail} /> : ''}
-          <MessageContent messageList={reportData.errMessage} onChooseTableItem={onChooseTableItem} />
+          {isShowTable ? (
+            <MessageContent messageList={errMsgList} onChooseTableItem={onChooseTableItem} />
+          ) : (
+            <MessageDetail message={showMsgDetail} />
+          )}
         </div>
       </Layout>
     </Layout>

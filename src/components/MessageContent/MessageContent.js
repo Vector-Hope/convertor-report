@@ -1,31 +1,19 @@
 import { Layout, Table } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './MessageContent.css';
 const { Content } = Layout;
 
-/**
- * @description: 初始化异常信息列表与table数据
- * @param {Array} messageList
- * @return {Object}
- */
-function initMessageList(messageList) {
+function getColumns(messageList) {
   const filePathFilters = [];
   const titleFilters = [];
-  const resetMessageList = messageList.map((message) => {
-    const { filePath, title, pathKeys, pathLabels } = message;
+  messageList.forEach((message) => {
+    const { filePath, title } = message;
     if (!filePathFilters.includes(filePath)) {
       filePathFilters.push(filePath);
     }
     if (!titleFilters.includes(title)) {
       titleFilters.push(title);
     }
-    return {
-      filePath: filePath,
-      title: title,
-      pathKeys: pathKeys,
-      pathLabels: pathLabels,
-      messageNum: message.errCodeList.length,
-    };
   });
   const columns = [
     {
@@ -59,37 +47,30 @@ function initMessageList(messageList) {
     },
   ];
 
-  return {
-    columns,
-    data: [...resetMessageList],
-  };
+  return columns;
 }
 
 function MessageContent({ messageList, onChooseTableItem }) {
-  const [messageTable, setMessageTable] = useState(initMessageList(messageList));
-  /**
-   * @description: 点击异常列表中的某项的回调
-   * @param {Object} record
-   * @return {*}
-   */
-  const chooseMessage = (record) => {
-    console.log(record);
-    onChooseTableItem(record.pathKeys, record.pathLabels);
-  };
+  let [columns, setColumns] = useState([]);
+
+  useEffect(() => {
+    setColumns(getColumns(messageList));
+  }, [messageList]);
+
   return (
     <Content className='report-message-content'>
       <div className='report-message-card'>
         <div className='report-message-title'>转换异常列表</div>
         <Table
           size='small'
-          columns={messageTable.columns}
-          dataSource={messageTable.data}
+          columns={columns}
+          dataSource={messageList}
           rowKey={(record, index) => index}
           rowClassName={(record, index) => 'report-message-detail'}
           onRow={(record) => {
             return {
               onClick: (e) => {
-                chooseMessage(record);
+                onChooseTableItem(record);
               },
             };
           }}
