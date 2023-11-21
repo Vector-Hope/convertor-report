@@ -7,20 +7,20 @@
     {
       "title": "自定义数据data-*不支持引用数据类型",
       "filePath": "convert-lab/miniprogram/utils/util.js",
-      "errType": "costomData",
+      "msgType": "costomData",
       "errCodeList": [
         {
           "codeBeforeConvert": {
             "filePath": "convert-lab/miniprogram/utils/util.js",
             "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -28,13 +28,13 @@
             "filePath": "convert-lab/miniprogram/utils/util.js",
             "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -44,20 +44,20 @@
     {
       "title": "不支持wx:scope-data属性",
       "filePath": "convert-lab/miniprogram/pages/index/index.js",
-      "errType": "wxScopeData",
+      "msgType": "wxScopeData",
       "errCodeList": [
         {
           "codeBeforeConvert": {
             "filePath": "convert-lab/miniprogram/pages/index/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -65,13 +65,13 @@
             "filePath": "convert-lab/miniprogram/pages/index/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -81,20 +81,20 @@
     {
       "title": "commonjs与es6语法混用",
       "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
-      "errType": "mixCommonjsEs6",
+      "msgType": "mixCommonjsEs6",
       "errCodeList": [
         {
           "codeBeforeConvert": {
             "filePath": "convert-lab/miniprogram/utils/util.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -102,13 +102,13 @@
             "filePath": "convert-lab/miniprogram/utils/util.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -118,13 +118,13 @@
             "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -132,13 +132,13 @@
             "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -148,20 +148,20 @@
     {
       "title": "不支持wx:scope-data属性",
       "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
-      "errType": "wxScopeData",
+      "msgType": "wxScopeData",
       "errCodeList": [
         {
           "codeBeforeConvert": {
             "filePath": "convert-lab/miniprogram/utils/util.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -169,13 +169,13 @@
             "filePath": "convert-lab/miniprogram/utils/util.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -185,13 +185,13 @@
             "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -199,13 +199,13 @@
             "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -215,20 +215,20 @@
     {
       "title": "data直接赋值不生效，请使用setData进行赋值",
       "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-      "errType": "dataDriectValueAssignment",
+      "msgType": "dataDriectValueAssignment",
       "errCodeList": [
         {
           "codeBeforeConvert": {
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -236,13 +236,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -252,13 +252,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -266,13 +266,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -282,13 +282,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -296,13 +296,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -312,20 +312,20 @@
     {
       "title": "样式变量注意父子层级结构",
       "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.css",
-      "errType": "styleVariable",
+      "msgType": "styleVariable",
       "errCodeList": [
         {
           "codeBeforeConvert": {
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -333,13 +333,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -349,13 +349,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -363,13 +363,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }
@@ -379,13 +379,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           },
@@ -393,13 +393,13 @@
             "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
             "code": "",
             "location": {
-              "loc": {
-                "start": 17,
-                "end": 27
+              "start": {
+                "row": 17,
+                "col": 27
               },
-              "row": {
-                "start": 17,
-                "end": 27
+              "end": {
+                "row": 17,
+                "col": 27
               }
             }
           }

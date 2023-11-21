@@ -9,7 +9,7 @@ type reportData = {
 type ErrMsgs = {
   "title": string,                  // 异常信息名称
   "filePath": string,               // 异常路径
-  "errType": string,                // 异常类型 ===> 在修改意见当中需要根据异常类型索引到对应的修改意见
+  "msgType": string,                // 异常类型 ===> 在修改意见当中需要根据异常类型索引到对应的修改意见
   "errCodeList": Array<ErrCodeMsg>, // 异常代码信息列表
 }
 

@@ -1,0 +1,10 @@
+{
+  "costomData": {
+    "msgTitle": "自定义数据data-*不支持引用数据类型",
+    "suggestionTitle": "自定义数据data-*适配",
+    "message": "自定义属性data-*是html的数据属性，只支持String类型的数据，当数据类型是Object时，不能直接使用dataset获取",
+    "wxDemo": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
+    "taroDemo": "<View\n  animation={animationData}\n  className='animation-example'\n></View>"
+  }
+}
+

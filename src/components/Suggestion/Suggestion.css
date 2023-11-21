@@ -1,0 +1,37 @@
+.suggestion-wrapper {
+  margin: 12px 26px;
+}
+
+.suggestion-title-wrapper,
+.suggestion-demo-wrapper {
+  margin-bottom: 30px;
+}
+.suggestion-title {
+  font-size: 18px;
+  line-height: 22px;
+  color: #252b3a;
+}
+
+.suggestion-message {
+  margin-top: 13px;
+  font-size: 14px;
+  line-height: 22px;
+  color: #71757f;
+}
+
+.suggestion-demo-title {
+  font-size: 14px;
+  line-height: 22px;
+  color: #252b3a;
+}
+
+.suggestion-demo {
+  background: #1e1e1e;
+  border-radius: 8px;
+  margin-top: 12px;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 20px;
+  color: #ffffff;
+  white-space: pre-wrap;
+}
