@@ -50,26 +50,35 @@ function MessageDetail({ message }) {
             </Button>
           </span>
         </div>
+        {
+          message.msgDescribe ? (
+            <div className='message-detail-describe'>
+              {message.msgDescribe}
+            </div>
+          ) : ''
+        }
         {message.errCodeList?.map((errCodeMsg, index) => {
           return <CodeCard errCodeMsg={errCodeMsg} />;
         })}
       </div>
       <div
-        className='message-suggestion-wrapper'
+        className='message-suggestion-wrapper-background'
         style={{
           right: suggestionWidth - 463,
         }}
       >
-        <div className='message-suggestion-name-wrapper'>
-          <div className='message-suggestion-icon-wrapper'>
-            <div className='message-suggestion-icon'></div>
+        <div className='message-suggestion-wrapper'>
+          <div className='message-suggestion-name-wrapper'>
+            <div className='message-suggestion-icon-wrapper'>
+              <div className='message-suggestion-icon'></div>
+            </div>
+            <div className='message-suggestion-name'>修改建议</div>
+            <div className='message-suggestion-close-wrapper' onClick={hideSuggestion}>
+              <img className='message-suggestion-close' src={closePng} alt='close' />
+            </div>
           </div>
-          <div className='message-suggestion-name'>修改建议</div>
-          <div className='message-suggestion-close-wrapper' onClick={hideSuggestion}>
-            <img className='message-suggestion-close' src={closePng} alt='close' />
-          </div>
+          <Suggestion suggestion={suggestion} />
         </div>
-        <Suggestion suggestion={suggestion} />
       </div>
     </Content>
   );

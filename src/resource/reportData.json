@@ -10,6 +10,7 @@
       "msgType": "costomData",
       "errCodeList": [
         {
+          "describe": "自定义数据data-*真的不支持引用数据类型",
           "codeBeforeConvert": {
             "filePath": "convert-lab/miniprogram/utils/util.js",
             "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
@@ -97,38 +98,10 @@
                 "col": 27
               }
             }
-          },
-          "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/utils/util.js",
-            "code": "",
-            "location": {
-              "start": {
-                "row": 17,
-                "col": 27
-              },
-              "end": {
-                "row": 17,
-                "col": 27
-              }
-            }
           }
         },
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
-            "code": "",
-            "location": {
-              "start": {
-                "row": 17,
-                "col": 27
-              },
-              "end": {
-                "row": 17,
-                "col": 27
-              }
-            }
-          },
-          "codeAfterConvert": {
             "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
             "code": "",
             "location": {
@@ -405,6 +378,12 @@
           }
         }
       ]
+    },
+    {
+      "title": "找不到配置文件",
+      "filePath": "convert-lab/miniprogram/packageAPI/interface/pulldownRefresh/index.json",
+      "msgType": "styleVariable",
+      "msgDescribe": "找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,根本找不到配置文件;真的真的找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,根本找不到配置文件"
     }
   ]
 }

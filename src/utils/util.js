@@ -103,9 +103,10 @@ function getFilesTree(msgData) {
 function addErrMessage(errMessages, projectFilesMenu) {
   errMessages.forEach((errMessage) => {
     const { pathKeys, pathLabels } = getErrMessagePathKeys(errMessage.filePath, projectFilesMenu);
+    const messageNum = errMessage.errCodeList ? errMessage.errCodeList.length : 1;
     reportData.errMessage.push({
       ...errMessage,
-      messageNum: errMessage.errCodeList.length,
+      messageNum,
       pathKeys: ['projectDirectory', ...pathKeys],
       pathLabels: ['工程目录', ...pathLabels],
     });

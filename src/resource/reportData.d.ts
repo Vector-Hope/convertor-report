@@ -10,19 +10,21 @@ type ErrMsgs = {
   "title": string,                  // 异常信息名称
   "filePath": string,               // 异常路径
   "msgType": string,                // 异常类型 ===> 在修改意见当中需要根据异常类型索引到对应的修改意见
-  "errCodeList": Array<ErrCodeMsg>, // 异常代码信息列表
+  "msgDescribe"?: string,               // 异常描述
+  "errCodeList"?: Array<ErrCodeMsg>, // 异常代码信息列表
 }
 
 type ErrCodeMsg = {
+  "describe"?: string,
   "codeBeforeConvert": {
     "filePath": string,     // 异常文件路径
     "code": string,         // 异常代码
     "location": Locations    // 异常代码位置
   },                        // 转换之前的异常代码信息
-  "codeAfterConvert": {
+  "codeAfterConvert"?: {
     "filePath": string,     // 异常文件路径
     "code": string,         // 异常代码
-    "location": Locations    // 异常代码位置
+    "location"?: Locations    // 异常代码位置
   },                        // 转换之后的异常代码信息
 }
 
