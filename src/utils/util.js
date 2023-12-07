@@ -1,18 +1,46 @@
 import data from '../resource/reportData.json';
 
-const msgData = data.errMsgList;
+/**
+ * @description: 格式化路径为相对于项目根目录路径
+ * @param {string} path
+ * @param {string} rootPath
+ * @return {string}
+ */
+function formatPath(path, rootPath = '') {
+  let filePath = path.split('\\').join('/');
+  if (rootPath && filePath.startsWith(rootPath)) {
+    filePath = filePath.slice(rootPath.length);
+  }
+  return filePath;
+}
 
-// 定义重置报告数据结构
-const reportData = {
-  projectDetail: {
-    projectName: data.projectName || '未定义',
-    projectPath: data.projectPath || '未知',
-    pagesNum: data.pagesNum || 0,
-    filesNum: data.filesNum || 0,
-  },
-  filesMenu: {},
-  errMessage: [],
-};
+/**
+ * @description: 获得修改路径后的异常信息
+ * @param {Object} oriErrMsg
+ * @param {string} rootPath
+ * @return {Object}
+ */
+function getMsgWithFormatPath(oriErrMsg, rootPath) {
+  let filePath = formatPath(oriErrMsg.filePath, rootPath);
+  const newErrMsg = {
+    title: oriErrMsg.title || '未定义',
+    msgType: oriErrMsg.msgType || 'undefined',
+    msgDescribe: oriErrMsg.msgDescribe || '',
+    filePath,
+  };
+  if (oriErrMsg.errCodeList) {
+    newErrMsg.errCodeList = oriErrMsg.errCodeList.map((errCode) => {
+      if (errCode.codeBeforeConvert) {
+        errCode.codeBeforeConvert.filePath = formatPath(errCode.codeBeforeConvert.filePath, rootPath);
+      }
+      if (errCode.codeAfterConvert) {
+        errCode.codeAfterConvert.filePath = formatPath(errCode.codeAfterConvert.filePath, rootPath);
+      }
+      return errCode;
+    });
+  }
+  return newErrMsg;
+}
 
 /**
  * @description: 获得工程文件目录信息
@@ -62,6 +90,10 @@ function getFilesMenu(tree, pathKey = '') {
   };
 }
 
+/**
+ * @description: 默认打开文件目录中第一个文件
+ * @param {Object} filesMenu
+ */
 function defaultOpen(filesMenu) {
   if (!filesMenu) {
     return;
@@ -73,44 +105,6 @@ function defaultOpen(filesMenu) {
       defaultOpen(filesMenu[pathKeys[0]].children);
     }
   }
-}
-
-/**
- * @description: 分解错误信息路径，并添加到树状结构中
- * @param {Array<Object>} msgData
- * @return {Object}
- */
-function getFilesTree(msgData) {
-  const filesTree = {};
-  msgData.forEach((errMessage) => {
-    const pathArr = errMessage.filePath.split('/');
-    let tree = filesTree;
-    pathArr.forEach((path) => {
-      if (!tree[path]) {
-        tree[path] = {};
-      }
-      tree = tree[path];
-    });
-  });
-  return filesTree;
-}
-
-/**
- * @description: 在返回的内容中加入错误信息
- * @param {Object} errMessage
- * @return {*}
- */
-function addErrMessage(errMessages, projectFilesMenu) {
-  errMessages.forEach((errMessage) => {
-    const { pathKeys, pathLabels } = getErrMessagePathKeys(errMessage.filePath, projectFilesMenu);
-    const messageNum = errMessage.errCodeList ? errMessage.errCodeList.length : 1;
-    reportData.errMessage.push({
-      ...errMessage,
-      messageNum,
-      pathKeys: ['projectDirectory', ...pathKeys],
-      pathLabels: ['工程目录', ...pathLabels],
-    });
-  });
 }
 
 /**
@@ -151,15 +145,32 @@ function getErrMessagePathKeys(filePath, filesMenu) {
 }
 
 /**
- * @description: 重置报告数据信息
+ * @description: 解析异常信息列表获得新异常信息列表和工程文件目录
+ * @param {Array} oriMsgList
+ * @param {string} projectPath
  * @return {Object}
  */
-export function getReportData() {
-  const errMsgList = data.errMsgList;
-  const filesTree = getFilesTree(errMsgList);
-  const projectFilesMenu = getFilesMenu(filesTree);
-  defaultOpen(projectFilesMenu);
-  reportData.filesMenu = {
+function parseMsgList(oriMsgList, projectPath) {
+  let rootPathArray = projectPath.split('/');
+  rootPathArray.pop();
+  rootPathArray.push('');
+  let rootPath = rootPathArray.join('/');
+  const filesTree = {};
+  const msgListWithFormatPath = oriMsgList.map((errMsg) => {
+    const newErrMsg = getMsgWithFormatPath(errMsg, rootPath);
+    const pathArr = newErrMsg.filePath.split('/');
+    let tree = filesTree;
+    pathArr.forEach((path) => {
+      if (!tree[path]) {
+        tree[path] = {};
+      }
+      tree = tree[path];
+    });
+    return newErrMsg;
+  });
+  const filesMenu = getFilesMenu(filesTree);
+  defaultOpen(filesMenu);
+  const projectFilesMenu = {
     overView: {
       key: 'overView',
       label: '转换概览',
@@ -173,9 +184,42 @@ export function getReportData() {
       isOpen: true,
       isSelect: false,
       type: 'menuGroup',
-      children: projectFilesMenu,
+      children: filesMenu,
     },
   };
-  addErrMessage(msgData, projectFilesMenu);
+  const newMsgList = msgListWithFormatPath.map((errMsg) => {
+    const { pathKeys, pathLabels } = getErrMessagePathKeys(errMsg.filePath, filesMenu);
+    const messageNum = errMsg.errCodeList ? errMsg.errCodeList.length : 1;
+    return {
+      ...errMsg,
+      messageNum,
+      pathKeys: ['projectDirectory', ...pathKeys],
+      pathLabels: ['工程目录', ...pathLabels],
+    };
+  });
+  return {
+    filesMenu: projectFilesMenu,
+    errMessage: newMsgList,
+  };
+}
+
+/**
+ * @description: 重置报告数据信息
+ * @return {Object}
+ */
+export function getReportData() {
+  // 定义重置报告数据结构
+  let projectPath = data.projectPath ? formatPath(data.projectPath) : '';
+  const { filesMenu, errMessage } = parseMsgList(data.errMsgList, projectPath);
+  const reportData = {
+    projectDetail: {
+      projectName: data.projectName || '未定义',
+      projectPath: projectPath || '未知',
+      pagesNum: data.pagesNum || 0,
+      filesNum: data.filesNum || 0,
+    },
+    filesMenu: filesMenu,
+    errMessage: errMessage,
+  };
   return reportData;
 }

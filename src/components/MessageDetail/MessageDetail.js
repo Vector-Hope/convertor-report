@@ -50,13 +50,7 @@ function MessageDetail({ message }) {
             </Button>
           </span>
         </div>
-        {
-          message.msgDescribe ? (
-            <div className='message-detail-describe'>
-              {message.msgDescribe}
-            </div>
-          ) : ''
-        }
+        {message.msgDescribe ? <div className='message-detail-describe'>{message.msgDescribe}</div> : ''}
         {message.errCodeList?.map((errCodeMsg, index) => {
           return <CodeCard errCodeMsg={errCodeMsg} />;
         })}

@@ -34,11 +34,20 @@
   margin: 6px 16px;
   border-radius: 2px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   transition: 0.3s;
   color: #252b3a;
   display: flex;
+  flex-wrap: nowrap;
+}
+
+.sub-menu-label:hover {
+  background-color: #e9edfa66;
+}
+
+.sub-menu-label-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .sub-menu-icon {

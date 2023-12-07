@@ -1,18 +1,18 @@
 {
   "projectName": "convert-lab",
-  "projectPath": "D:/project/weapp/convert-lab",
+  "projectPath": "D:\\project\\weapp\\convert-lab",
   "pagesNum": 33,
   "filesNum": 121,
   "errMsgList": [
     {
       "title": "自定义数据data-*不支持引用数据类型",
-      "filePath": "convert-lab/miniprogram/utils/util.js",
+      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\utils\\util.js",
       "msgType": "costomData",
       "errCodeList": [
         {
           "describe": "自定义数据data-*真的不支持引用数据类型",
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/utils/util.js",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\utils\\util.js",
             "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
@@ -26,7 +26,7 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/utils/util.js",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\utils\\util.js",
             "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
@@ -44,13 +44,13 @@
     },
     {
       "title": "不支持wx:scope-data属性",
-      "filePath": "convert-lab/miniprogram/pages/index/index.js",
+      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\pages\\index\\index.js",
       "msgType": "wxScopeData",
       "errCodeList": [
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/pages/index/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\pages\\index\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -63,8 +63,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/pages/index/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\pages\\index\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -81,13 +81,13 @@
     },
     {
       "title": "commonjs与es6语法混用",
-      "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
+      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packagesAPI\\basics\\basics\\index.js",
       "msgType": "mixCommonjsEs6",
       "errCodeList": [
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/utils/util.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\utils\\util.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -102,8 +102,8 @@
         },
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packagesAPI\\basics\\basics\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -120,13 +120,13 @@
     },
     {
       "title": "不支持wx:scope-data属性",
-      "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
+      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packagesAPI\\basics\\basics\\index.js",
       "msgType": "wxScopeData",
       "errCodeList": [
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/utils/util.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\utils\\util.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -139,8 +139,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/utils/util.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\utils\\util.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -155,8 +155,8 @@
         },
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packagesAPI\\basics\\basics\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -169,8 +169,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/packagesAPI/basics/basics/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packagesAPI\\basics\\basics\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -187,13 +187,13 @@
     },
     {
       "title": "data直接赋值不生效，请使用setData进行赋值",
-      "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
+      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
       "msgType": "dataDriectValueAssignment",
       "errCodeList": [
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -206,8 +206,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -222,8 +222,8 @@
         },
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -236,8 +236,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -252,8 +252,8 @@
         },
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -266,8 +266,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -284,13 +284,13 @@
     },
     {
       "title": "样式变量注意父子层级结构",
-      "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.css",
+      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.css",
       "msgType": "styleVariable",
       "errCodeList": [
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -303,8 +303,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -319,8 +319,8 @@
         },
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -333,8 +333,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -349,8 +349,8 @@
         },
         {
           "codeBeforeConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -363,8 +363,8 @@
             }
           },
           "codeAfterConvert": {
-            "filePath": "convert-lab/miniprogram/packageFramework/wxs/index.js",
-            "code": "",
+            "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
+            "code": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
             "location": {
               "start": {
                 "row": 17,
@@ -381,7 +381,7 @@
     },
     {
       "title": "找不到配置文件",
-      "filePath": "convert-lab/miniprogram/packageAPI/interface/pulldownRefresh/index.json",
+      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageAPI\\interface\\pulldownRefresh\\index.json",
       "msgType": "styleVariable",
       "msgDescribe": "找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,根本找不到配置文件;真的真的找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,根本找不到配置文件"
     }

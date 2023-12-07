@@ -129,7 +129,7 @@ function Menu({ menuItems, selectKeys, getSelectKeys }) {
                     ''
                   )}
                   <div className='sub-menu-icon'>{subMenuIcon(subMenuItems[key])}</div>
-                  {subMenuItems[key].label}
+                  <div className='sub-menu-label-name'>{subMenuItems[key].label}</div>
                 </div>
               </div>
               {subMenuItems[key].children ? (
