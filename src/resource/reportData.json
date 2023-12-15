@@ -5,9 +5,8 @@
   "filesNum": 121,
   "errMsgList": [
     {
-      "title": "自定义数据data-*不支持引用数据类型",
       "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\utils\\util.js",
-      "msgType": "costomData",
+      "msgType": "wxElifValueFormatError",
       "errCodeList": [
         {
           "describe": "自定义数据data-*真的不支持引用数据类型",
@@ -43,9 +42,8 @@
       ]
     },
     {
-      "title": "不支持wx:scope-data属性",
       "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\pages\\index\\index.js",
-      "msgType": "wxScopeData",
+      "msgType": "WxsTagCodeMissingError",
       "errCodeList": [
         {
           "codeBeforeConvert": {
@@ -80,9 +78,8 @@
       ]
     },
     {
-      "title": "commonjs与es6语法混用",
       "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packagesAPI\\basics\\basics\\index.js",
-      "msgType": "mixCommonjsEs6",
+      "msgType": "ImportSrcPathFormatError",
       "errCodeList": [
         {
           "codeBeforeConvert": {
@@ -119,9 +116,8 @@
       ]
     },
     {
-      "title": "不支持wx:scope-data属性",
-      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packagesAPI\\basics\\basics\\index.js",
-      "msgType": "wxScopeData",
+      "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packagesAPI\\basics\\basicsTest\\index.js",
+      "msgType": "TemplateNameTypeMismatchError",
       "errCodeList": [
         {
           "codeBeforeConvert": {
@@ -186,9 +182,8 @@
       ]
     },
     {
-      "title": "data直接赋值不生效，请使用setData进行赋值",
       "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.js",
-      "msgType": "dataDriectValueAssignment",
+      "msgType": "WxmlTagSrcAttributeError",
       "errCodeList": [
         {
           "codeBeforeConvert": {
@@ -283,9 +278,8 @@
       ]
     },
     {
-      "title": "样式变量注意父子层级结构",
       "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageFramework\\wxs\\index.css",
-      "msgType": "styleVariable",
+      "msgType": "CommonJSModuleImportError",
       "errCodeList": [
         {
           "codeBeforeConvert": {
@@ -380,9 +374,8 @@
       ]
     },
     {
-      "title": "找不到配置文件",
       "filePath": "D:\\project\\weapp\\convert-lab\\miniprogram\\packageAPI\\interface\\pulldownRefresh\\index.json",
-      "msgType": "styleVariable",
+      "msgType": "InvalidASTError",
       "msgDescribe": "找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,根本找不到配置文件;真的真的找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,找不到配置文件,根本找不到配置文件"
     }
   ]

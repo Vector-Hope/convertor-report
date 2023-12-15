@@ -1,4 +1,5 @@
 import data from '../resource/reportData.json';
+import suggestion from '../resource/suggestions.json';
 
 /**
  * @description: 格式化路径为相对于项目根目录路径
@@ -22,8 +23,10 @@ function formatPath(path, rootPath = '') {
  */
 function getMsgWithFormatPath(oriErrMsg, rootPath) {
   let filePath = formatPath(oriErrMsg.filePath, rootPath);
+  const suggestionMsg = suggestion[oriErrMsg.msgType];
   const newErrMsg = {
-    title: oriErrMsg.title || '未定义',
+    title: suggestionMsg ? suggestionMsg.msgTitle : '未定义',
+    suggestion: suggestionMsg || {},
     msgType: oriErrMsg.msgType || 'undefined',
     msgDescribe: oriErrMsg.msgDescribe || '',
     filePath,
@@ -123,7 +126,8 @@ function getErrMessagePathKeys(filePath, filesMenu) {
         pathLabels: [...pathLabels, filesMenu[menuIndex].label],
       };
     }
-    if (filePath.startsWith(filesMenu[menuIndex].key)) {
+    const preKey = filesMenu[menuIndex].key + (filesMenu[menuIndex].type === 'menuGroup' ? '/' : '');
+    if (filePath.startsWith(preKey)) {
       pathKeys.push(filesMenu[menuIndex].key);
       pathLabels.push(filesMenu[menuIndex].label);
       if (filesMenu[menuIndex].children) {

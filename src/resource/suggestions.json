@@ -1,10 +1,153 @@
 {
-  "costomData": {
-    "msgTitle": "自定义数据data-*不支持引用数据类型",
-    "suggestionTitle": "自定义数据data-*适配",
-    "message": "自定义属性data-*是html的数据属性，只支持String类型的数据，当数据类型是Object时，不能直接使用dataset获取",
-    "wxDemo": "<View\n  animation={animationData}\n  className='animation-example'\n></View>",
-    "taroDemo": "<View\n  animation={animationData}\n  className='animation-example'\n></View>"
+  "wxElifValueFormatError": {
+    "msgTitle": "属性转换错误 wx:elif 的值需要用双括号 `{{}}` 包裹它的值",
+    "message": "在微信小程序中，根据语法规范，当使用wx:elif条件语法时，需要使用{{}}双括号将值包裹",
+    "wxDemo": "<view wx:if='{{ number === 5 }}'>5</view>\n<view wx:elif='{{ number === 0 }}'>0</view>\n<view wx:else>其他数值</view>",
+    "taroDemo": ""
+  },
+  "DynamicImportNotSupportedError": {
+    "msgTitle": "require暂不支持动态导入",
+    "message": "在微信小程序中，允许开发者使用require动态导入文件来引入变量。但因为convertor转换过程中无法识别带有变量的路径，因此可能会导致引入失败或者引入错误。因此请避免require出现动态地址",
+    "wxDemo": "const listData = require('../../utils/util.js')",
+    "taroDemo": ""
+  },
+  "ProjectConfigParsingError": {
+    "msgTitle": "project.config解析失败，请检查",
+    "message": "请在project.config文件中配置正确的字段",
+    "wxDemo": "",
+    "taroDemo": ""
+  },
+  "MissingJSFileError": {
+    "msgTitle": "页面没有 JS 文件",
+    "message": "在微信小程序中，page页面必须包含JS文件，请检查是否存在JS文件",
+    "wxDemo": "",
+    "taroDemo": ""
+  },
+  "WriteLogException": {
+    "msgTitle": "写日志文件异常",
+    "message": "写日志文件异常",
+    "wxDemo": "",
+    "taroDemo": ""
+  },
+  "ImportSrcPathFormatError": {
+    "msgTitle": "import/include 的 src 请填入正确路径再进行转换",
+    "message": "在微信小程序中，<import>或<include>标签中src属性允许引入的路径是绝对路径或者相对路径，请检查是否引入正确路径再转换",
+    "wxDemo": "<import src='../../template/index.wxml'></import>",
+    "taroDemo": ""
+  },
+  "TemplateNameTypeMismatchError": {
+    "msgTitle": "template 的 `name` 属性只能是字符串",
+    "message": "在微信小程序中，<template>标签的 name 属性只能是字符串",
+    "wxDemo": "<template name='msgItem'>\n  <view>\n    <text> {{index}}: {{msg}} </text>\n    <text> Time: {{time}} </text>\n  </view>\n</template>",
+    "taroDemo": ""
+  },
+  "TemplateIsAttributeEmptyError": {
+    "msgTitle": "template 的 `is` 属性不能为空",
+    "message": "在微信小程序中，如果想要引用某个模版，则<template>标签的 is 属性不能为空",
+    "wxDemo": "<template is='msgItem' data='{{...item}}'/>",
+    "taroDemo": ""
+  },
+  "TemplateIsAttributeTypeMismatchError": {
+    "msgTitle": "当 template is 标签是三元表达式时，他的两个值都必须为字符串",
+    "message": "在微信小程序中，当<template>标签的is属性是三元表达式时，表达式的两个值都必须为字符串",
+    "wxDemo": "<template \n  is='{{ list.length > 0 ? 'msgItem' : '' }}'\n  data='{{...item}}'\n/>",
+    "taroDemo": ""
+  },
+  "TemplateMissingIsNameError": {
+    "msgTitle": "template 标签必须指名 `is` 或 `name` 任意一个标签",
+    "message": "在微信小程序中，使用<template>标签时需要指定 is 或 name 任意一个属性",
+    "wxDemo": "<template name='msgItem'>\n  <view>123</view>\n</template>\n或者\n<template is='{{ list.length > 0 ? 'msgItem' : '' }}'",
+    "taroDemo": ""
+  },
+  "WxmlTagSrcAttributeError": {
+    "msgTitle": "标签中 src 属性解析失败",
+    "message": "在微信小程序中，对于一些标签src属性是必须得。例如<import>或<include>标签，请检查该标签是否定义了src属性或者src的值是否符合法",
+    "wxDemo": "<import src='../../template/index.wxml'></import>",
+    "taroDemo": ""
+  },
+  "InvalidASTError": {
+    "msgTitle": "无效的AST",
+    "message": "convertor在转换中检测到无效的AST，请检查代码是否遵循语法规范",
+    "wxDemo": "",
+    "taroDemo": ""
+  },
+  "CommonJSModuleImportError": {
+    "msgTitle": "commomjs模块不支持同时引入default和非default模块",
+    "message": "在commonjs模块规范中不支持同时引入default和非default模块，如果想要导入默认值和非默认值请分别导入",
+    "wxDemo": "// 默认导出\nconst listData = require('../../utils/util.js')\n// 导出具体变量\nconst { listData_1 } = require('../../utils/util.js')",
+    "taroDemo": ""
+  },
+  "SlotValueTypeError": {
+    "msgTitle": "slot 的值必须是一个字符串",
+    "message": "在微信小程序中，slot属性的值必须是一个字符串",
+    "wxDemo": " <test>\n  <view slot='before'>before</view>\n  <view slot='after'>after</view>\n</test>",
+    "taroDemo": ""
+  },
+  "WxsTagAttributeEmptyError": {
+    "msgTitle": "WXS 标签的属性值不得为空",
+    "message": "在微信小程序中，WXS 标签的属性值不得为空",
+    "wxDemo": "<wxs module='sample'>\n  var a = 1;\n  var b = 2;\n  var c = 'fake';\n</wxs>",
+    "taroDemo": ""
+  },
+  "WxsTagCodeMissingError": {
+    "msgTitle": "wxs 如果没有 src 属性，标签内部必须有 wxs 代码。",
+    "message": "在微信小程序中,wxs 如果没有 src 属性，标签内部必须有 wxs 代码。",
+    "wxDemo": "<wxs module='sample'>\n  var a = 1;\n  var b = 2;\n  var c = 'fake';\n</wxs>",
+    "taroDemo": ""
+  },
+  "GetRegExpVariableTypeError": {
+    "msgTitle": "getRegExp 函数暂不支持传入变量类型的参数",
+    "message": "在微信小程序中，wxs中使用的getRegExp函数暂不支持传入变量类型的参数",
+    "wxDemo": "",
+    "taroDemo": ""
+  },
+  "GetRegExpParameterTypeError": {
+    "msgTitle": "getRegExp 函数暂不支持传入非字符串类型的参数",
+    "message": "在微信小程序中，wxs中使用的getRegExp函数暂不支持传入非字符串类型的参数",
+    "wxDemo": "<wxs module='foo'>\n  var getRex = getRegExp('123')\n  module.exports.getRex = getRex\n</wxs>",
+    "taroDemo": ""
+  },
+  "WxForValueFormatError": {
+    "msgTitle": "wx:for 的值必须使用 '{{}}' 包裹",
+    "message": "在微信小程序中，wx:for 的值必须使用 '{{}}' 包裹",
+    "wxDemo": "<view wx:for='{{array}}'>\n  {{index}}: {{item.message}}\n</view>",
+    "taroDemo": ""
+  },
+  "WxForItemValueError": {
+    "msgTitle": "WX_FOR_ITEM 的值必须是一个字符串",
+    "message": "在微信小程序中，允许对for循环中的item通过wx:for-item的语法对其进行重命名，但其值必须是一个字符串",
+    "wxDemo": "<view wx:for='{{array}}' wx:for-index='idx' wx:for-item='itemName'>\n  {{idx}}: {{itemName.message}}\n</view>",
+    "taroDemo": ""
+  },
+  "WxForIndexValueError": {
+    "msgTitle": "WX_FOR_INDEX 的值必须是一个字符串",
+    "message": "在微信小程序中，允许对for循环中的item通过wx:for-index的语法对其进行重命名，但其值必须是一个字符串",
+    "wxDemo": "<view wx:for='{{array}}' wx:for-index='idx' wx:for-item='itemName'>\n  {{idx}}: {{itemName.message}}\n</view>",
+    "taroDemo": ""
+  },
+  "StyleAttributeParsingError": {
+    "msgTitle": "style属性解析失败",
+    "message": "convertor解析内联style失败，请检查内联样式语法是否符合规范",
+    "wxDemo": "<view\n  style='height: 100px;width: 100px;background-color: red;'\n></view>",
+    "taroDemo": ""
+  },
+  "TemplateParameterConversionError": {
+    "msgTitle": "转换模板参数报错",
+    "message": "请检查代码是否遵循微信小程序语法规范",
+    "wxDemo": "",
+    "taroDemo": ""
+  },
+  "InvalidVariableNameError": {
+    "msgTitle": "属性值不是一个有效的变量名",
+    "message": "请检查属性值是否是一个有效的变量名",
+    "wxDemo": "",
+    "taroDemo": ""
+  },
+  "UnterminatedComment": {
+    "msgTitle": "结尾注释转换报错",
+    "message": "微信小程序中，在wxs文件中允许使用单行注释、多行注释以及结尾注释。因为在convertor转换过程中，如果使用结尾注释，babel解析代码时会报错，因此建议避免使用结尾注释，或将该结尾注释补全",
+    "wxDemo": "<wxs module='simple'>\n  /*结尾注释。即从 /* 开始往后的所有 WXS 代码均被注释\n  var a = 1;\n  var b = 2;\n  var c = 'fake';\n  */\n</wxs>",
+    "taroDemo": ""
   }
 }
 

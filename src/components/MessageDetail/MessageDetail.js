@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import CodeCard from '../CodeCard/CodeCard';
 import Suggestion from '../Suggestion/Suggestion';
 import closePng from '../../static/close.png';
-import suggestions from '../../resource/suggestions.json';
 import './MessageDetail.css';
 const { Content } = Layout;
 
@@ -14,7 +13,7 @@ function MessageDetail({ message }) {
   useEffect(() => {
     if (typeof message === 'object' && Object.keys(message).length > 0) {
       setShowMsgDetail(message);
-      setSuggestion(suggestions['costomData' || message.msgType]);
+      setSuggestion(message.suggestion);
     } else {
       setShowMsgDetail({});
     }

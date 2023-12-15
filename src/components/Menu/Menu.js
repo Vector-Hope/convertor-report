@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { Tooltip } from 'antd';
 import arrowPng from '../../static/arrow.png';
 import filePng from '../../static/file.png';
 import folderOpenPng from '../../static/folder_open.png';
@@ -129,7 +130,10 @@ function Menu({ menuItems, selectKeys, getSelectKeys }) {
                     ''
                   )}
                   <div className='sub-menu-icon'>{subMenuIcon(subMenuItems[key])}</div>
-                  <div className='sub-menu-label-name'>{subMenuItems[key].label}</div>
+
+                  <Tooltip mouseEnterDelay='1' title={subMenuItems[key].label}>
+                    <div className='sub-menu-label-name'>{subMenuItems[key].label}</div>
+                  </Tooltip>
                 </div>
               </div>
               {subMenuItems[key].children ? (
