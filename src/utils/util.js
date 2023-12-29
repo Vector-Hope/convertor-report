@@ -159,6 +159,27 @@ function parseMsgList(oriMsgList, projectPath) {
   rootPathArray.pop();
   rootPathArray.push('');
   let rootPath = rootPathArray.join('/');
+  if (oriMsgList.length === 0) {
+    return {
+      filesMenu: {
+        overView: {
+          key: 'overView',
+          label: '转换概览',
+          isOpen: false,
+          isSelect: true,
+          type: 'menuItem',
+        },
+        projectDirectory: {
+          key: 'projectDirectory',
+          label: '异常目录',
+          isOpen: true,
+          isSelect: false,
+          type: 'menuGroup',
+        },
+      },
+      errMessage: [],
+    };
+  }
   const filesTree = {};
   const msgListWithFormatPath = oriMsgList.map((errMsg) => {
     const newErrMsg = getMsgWithFormatPath(errMsg, rootPath);
@@ -184,7 +205,7 @@ function parseMsgList(oriMsgList, projectPath) {
     },
     projectDirectory: {
       key: 'projectDirectory',
-      label: '工程目录',
+      label: '异常目录',
       isOpen: true,
       isSelect: false,
       type: 'menuGroup',

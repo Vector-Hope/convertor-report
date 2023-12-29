@@ -1,4 +1,4 @@
-import { Layout, Table } from 'antd';
+import { Layout, Table, Empty, ConfigProvider } from 'antd';
 import { useEffect, useState } from 'react';
 import './MessageContent.css';
 const { Content } = Layout;
@@ -56,25 +56,29 @@ function MessageContent({ messageList, onChooseTableItem }) {
   useEffect(() => {
     setColumns(getColumns(messageList));
   }, [messageList]);
-
+  const renderEmpty = () => (
+    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={<span>工程转换无错误</span>}></Empty>
+  );
   return (
     <Content className='report-message-content'>
       <div className='report-message-card'>
         <div className='report-message-title'>转换异常列表</div>
-        <Table
-          size='small'
-          columns={columns}
-          dataSource={messageList}
-          rowKey={(record, index) => index}
-          rowClassName={(record, index) => 'report-message-detail'}
-          onRow={(record) => {
-            return {
-              onClick: (e) => {
-                onChooseTableItem(record);
-              },
-            };
-          }}
-        />
+        <ConfigProvider renderEmpty={renderEmpty}>
+          <Table
+            size='small'
+            columns={columns}
+            dataSource={messageList}
+            rowKey={(record, index) => index}
+            rowClassName={(record, index) => 'report-message-detail'}
+            onRow={(record) => {
+              return {
+                onClick: (e) => {
+                  onChooseTableItem(record);
+                },
+              };
+            }}
+          />
+        </ConfigProvider>
       </div>
     </Content>
   );
